@@ -1,5 +1,7 @@
 import React from 'react';
 import { FinancialForm } from '../utils/formSchema';
+import { Button } from './button/Button';
+import { Trash2 } from 'react-feather';
 
 interface QuestionAndAnswerProps {
   formData: FinancialForm;
@@ -50,12 +52,17 @@ export const QuestionAndAnswer: React.FC<QuestionAndAnswerProps> = ({
                 >
                   {item}
                 </span>
-                <button onClick={() => removeItem(section, index)}>
-                  Remove
-                </button>
+                <Trash2
+                  onClick={() => removeItem(section, index)}
+                  style={{ cursor: 'pointer' }}
+                />
               </div>
             ))}
-            <button onClick={() => addItem(section)}>Add {section}</button>
+            <Button
+              label="Add"
+              buttonStyle="action"
+              onClick={() => addItem(section)}
+            />
           </div>
         )
       )}
