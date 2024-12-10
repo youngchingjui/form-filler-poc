@@ -392,7 +392,8 @@ export function ConsolePage() {
             },
             value: {
               type: 'string',
-              description: 'The new value for the item.',
+              description:
+                'The new value for the item. Should be formatted like this: "<Item>: <Amount> <?Currency> / <Frequency>',
             },
           },
           required: ['section', 'action'],
