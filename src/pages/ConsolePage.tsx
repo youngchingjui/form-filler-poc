@@ -175,7 +175,7 @@ export function ConsolePage() {
     client.sendUserMessageContent([
       {
         type: `input_text`,
-        text: `Hello! Who are you and how can you help me?`,
+        text: `Hello`,
       },
     ]);
 
