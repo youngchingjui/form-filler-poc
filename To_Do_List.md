@@ -74,8 +74,8 @@ I want you to implement the todo-list item, then succinctly explain what you did
 ### 4. UI Enhancements
 
 - **Modify the User Interface for Improved Interaction**
-  - [ ] **Remove Map from Main Page**
-    - [ ] Identify and remove the map component from the main page in `src/pages/ConsolePage.tsx`.
+  - [x] **Remove Map from Main Page**
+    - [x] Identify and remove the map component from the main page in `src/pages/ConsolePage.tsx`.
   - [ ] **Implement Log Drawer**
     - [ ] Create a drawer component in `src/pages/ConsolePage.tsx` to display logs.
     - [ ] Add a button to toggle the drawer open and closed.
