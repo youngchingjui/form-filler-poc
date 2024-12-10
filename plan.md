@@ -1,15 +1,59 @@
-OK, so I need to plan for this application. Currently this application is a demonstration of the real-time API and it shows logs of the API running and it has a short little demo of the real-time API using function calling to pull weather using the get weather function.
+# Objective
 
-I need to transform this application to demonstrate another proof of concept. This proof of concept is going to demonstrate using the real-time API to fill out complicated forms.
+Transform the existing application from demonstrating weather retrieval to filling out a financial suitability form using the real-time API.
 
-Specifically, the form that we would want to fill out is a financial suitability form. There are three main questions that we want the user to answer, and we want this application to automatically fill out the form based off the answers.
+# Features to Implement
 
-The form has three main fields or questions that they need together from the user the first question is what is your current net worth and can you break it down by assets?
+## Voice Input
 
-The second question is what is your income and can you also break that down for me?
+- Capture user responses to three main questions using voice input.
 
-Finally, the last question is, can you please break down your costs? Give me an understanding of what do you spend your money on how frequently and so forth
+## Real-time API Integration
 
-The user is going to give this input via voice input will use the opening eye real time API to have an AI conversation with a user
+- Use the OpenAI real-time API to process voice input and fill out the form.
 
-As the user is giving this information, then the real time API should both be running function, calls to update the form as well as responding back to the user with some prompts as to further information that it still needs to collect
+## Form Fields
+
+- **Current Net Worth and Asset Breakdown**
+- **Income and Its Breakdown**
+- **Costs and Spending Habits**
+
+# Technical Steps
+
+## Voice Input Handling
+
+- Utilize the existing `WavRecorder` for capturing voice input.
+- Ensure the `RealtimeClient` is set up to handle voice input and transcription.
+
+## API Function Calls
+
+- Modify or add new tools in the `RealtimeClient` to handle form filling logic.
+- Implement a new function to process the financial data and update the form fields.
+
+## Form Management
+
+- Create a new component or modify an existing one to display the financial suitability form.
+- Ensure the form updates in real-time as the user provides input.
+
+## User Interaction
+
+- Provide feedback to the user through the real-time API, prompting for more information if needed.
+- Use the `WavStreamPlayer` to play back responses or confirmations to the user.
+
+## Code Modifications
+
+- **Update `ConsolePage.tsx`:**
+  - Add logic to handle new form-related function calls.
+  - Update the event handling to process and display form data.
+- **Modify `conversation_config.js`:**
+  - Update instructions to guide the AI in handling financial data input.
+
+## Testing and Validation
+
+- Test the application with various inputs to ensure the form is filled out accurately.
+- Validate the voice input and transcription accuracy.
+
+## Deployment
+
+- Ensure the application is ready for deployment with the new features.
+- Update documentation to reflect changes in functionality.
