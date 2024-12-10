@@ -1,48 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { FinancialForm } from '../utils/formSchema';
 
 interface QuestionAndAnswerProps {
-  questions: string[];
-  onAnswerUpdate: (index: number, answer: string) => void;
-  updatedAnswers?: { index: number; answer: string }[];
+  formData: FinancialForm;
+  onFormUpdate: (data: FinancialForm) => void;
 }
 
 export const QuestionAndAnswer: React.FC<QuestionAndAnswerProps> = ({
-  questions,
-  onAnswerUpdate,
-  updatedAnswers = [],
+  formData,
+  onFormUpdate,
 }) => {
-  const [answers, setAnswers] = useState<string[]>(
-    Array(questions.length).fill('')
-  );
+  const handleItemChange = (
+    section: keyof FinancialForm,
+    index: number,
+    value: string
+  ) => {
+    const updatedSection = [...formData[section]];
+    updatedSection[index] = value;
+    onFormUpdate({ ...formData, [section]: updatedSection });
+  };
 
-  useEffect(() => {
-    updatedAnswers.forEach(({ index, answer }) => {
-      const newAnswers = [...answers];
-      newAnswers[index] = answer;
-      setAnswers(newAnswers);
-    });
-  }, [updatedAnswers]);
+  const addItem = (section: keyof FinancialForm) => {
+    onFormUpdate({ ...formData, [section]: [...formData[section], ''] });
+  };
 
-  const handleAnswerChange = (index: number, answer: string) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = answer;
-    setAnswers(newAnswers);
-    onAnswerUpdate(index, answer);
+  const removeItem = (section: keyof FinancialForm, index: number) => {
+    const updatedSection = formData[section].filter((_, i) => i !== index);
+    onFormUpdate({ ...formData, [section]: updatedSection });
   };
 
   return (
     <div data-component="QuestionAndAnswer">
-      {questions.map((question, index) => (
-        <div key={index} className="question-answer-pair">
-          <div className="question">{question}</div>
-          <input
-            type="text"
-            value={answers[index]}
-            onChange={(e) => handleAnswerChange(index, e.target.value)}
-            placeholder="Your answer..."
-          />
-        </div>
-      ))}
+      {(['assets', 'income', 'expenses'] as (keyof FinancialForm)[]).map(
+        (section) => (
+          <div key={section} className="section">
+            <h3>{section.charAt(0).toUpperCase() + section.slice(1)}</h3>
+            {formData[section].map((item, index) => (
+              <div key={index} className="list-item">
+                <span
+                  contentEditable
+                  suppressContentEditableWarning
+                  onBlur={(e) =>
+                    handleItemChange(
+                      section,
+                      index,
+                      e.currentTarget.textContent || ''
+                    )
+                  }
+                >
+                  {item}
+                </span>
+                <button onClick={() => removeItem(section, index)}>
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button onClick={() => addItem(section)}>
+              Add {section.slice(0, -1)}
+            </button>
+          </div>
+        )
+      )}
     </div>
   );
 };

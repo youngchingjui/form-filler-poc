@@ -28,6 +28,7 @@ import { LogDrawer } from '../components/LogDrawer';
 import './ConsolePage.scss';
 import { RealtimeEvent } from '../utils/interfaces.js';
 import { Coordinates } from '../utils/interfaces.js';
+import { financialFormSchema, FinancialForm } from '../utils/formSchema';
 
 export function ConsolePage() {
   /**
@@ -102,6 +103,19 @@ export function ConsolePage() {
   const [updatedAnswers, setUpdatedAnswers] = useState<
     { index: number; answer: string }[]
   >([]);
+
+  /**
+   * Initialize form data with default values
+   */
+  const [formData, setFormData] = useState<FinancialForm>({
+    assets: [''],
+    income: [''],
+    expenses: [''],
+  });
+
+  const handleFormUpdate = (data: FinancialForm) => {
+    setFormData(data);
+  };
 
   /**
    * When you click the API key
@@ -603,11 +617,10 @@ export function ConsolePage() {
             </div>
           </div>
           <div className="content-block questions">
-            <div className="content-block-title">Questions</div>
+            <div className="content-block-title">Financial Information</div>
             <QuestionAndAnswer
-              questions={questions}
-              onAnswerUpdate={handleAnswerUpdate}
-              updatedAnswers={updatedAnswers}
+              formData={formData}
+              onFormUpdate={handleFormUpdate}
             />
           </div>
         </div>
