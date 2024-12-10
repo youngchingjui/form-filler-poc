@@ -99,6 +99,10 @@ export function ConsolePage() {
   const [marker, setMarker] = useState<Coordinates | null>(null);
   const [isLogDrawerOpen, setIsLogDrawerOpen] = useState(false);
 
+  const [updatedAnswers, setUpdatedAnswers] = useState<
+    { index: number; answer: string }[]
+  >([]);
+
   /**
    * When you click the API key
    */
@@ -443,7 +447,19 @@ export function ConsolePage() {
 
   const handleAnswerUpdate = (index: number, answer: string) => {
     console.log(`Answer for question ${index + 1}: ${answer}`);
-    // Here you can handle the updated answer, e.g., send it to the server or update the state
+    // Update the state with the new answer
+    setUpdatedAnswers((prevAnswers) => {
+      const newAnswers = [...prevAnswers];
+      const existingIndex = newAnswers.findIndex(
+        (item) => item.index === index
+      );
+      if (existingIndex !== -1) {
+        newAnswers[existingIndex] = { index, answer };
+      } else {
+        newAnswers.push({ index, answer });
+      }
+      return newAnswers;
+    });
   };
 
   /**
@@ -591,6 +607,7 @@ export function ConsolePage() {
             <QuestionAndAnswer
               questions={questions}
               onAnswerUpdate={handleAnswerUpdate}
+              updatedAnswers={updatedAnswers}
             />
           </div>
         </div>
