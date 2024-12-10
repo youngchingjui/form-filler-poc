@@ -277,4 +277,46 @@
       }
     }
   }
+
+  .log-drawer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    max-height: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    transform: translateY(100%);
+
+    &.open {
+      transform: translateY(0);
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      background-color: #0099ff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .log-content {
+      padding: 16px;
+      overflow-y: auto;
+      max-height: 300px;
+
+      .log-entry {
+        margin-bottom: 8px;
+        pre {
+          background-color: #f0f0f0;
+          padding: 8px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
 }
