@@ -71,6 +71,17 @@ I want you to implement the todo-list item, then succinctly explain what you did
     - [ ] Bind form fields to real-time data models.
     - [ ] Ensure fields update as data is processed.
 
+### 4. UI Enhancements
+
+- **Modify the User Interface for Improved Interaction**
+  - [ ] **Remove Map from Main Page**
+    - [ ] Identify and remove the map component from the main page in `src/pages/ConsolePage.tsx`.
+  - [ ] **Implement Log Drawer**
+    - [ ] Create a drawer component in `src/pages/ConsolePage.tsx` to display logs.
+    - [ ] Add a button to toggle the drawer open and closed.
+    - [ ] Ensure the drawer is hidden by default and only opens when the button is clicked.
+    - [ ] Test the drawer functionality to ensure logs are displayed correctly and the UI remains responsive.
+
 ## Technical Steps
 
 ### 1. Voice Input Handling
