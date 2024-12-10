@@ -101,7 +101,12 @@ export function ConsolePage() {
   const [isLogDrawerOpen, setIsLogDrawerOpen] = useState(false);
 
   const [updatedAnswers, setUpdatedAnswers] = useState<
-    { index: number; answer: string }[]
+    {
+      questionIndex: number;
+      answerIndex: number;
+      action: string;
+      answer: string;
+    }[]
   >([]);
 
   /**
@@ -113,8 +118,23 @@ export function ConsolePage() {
     expenses: [''],
   });
 
-  const handleFormUpdate = (data: FinancialForm) => {
-    setFormData(data);
+  const handleFormUpdate = (
+    section: string,
+    action: string,
+    index: number,
+    value: string
+  ) => {
+    setFormData((prevData) => {
+      const updatedSection = [...prevData[section as keyof FinancialForm]];
+      if (action === 'add') {
+        updatedSection.push(value);
+      } else if (action === 'update') {
+        updatedSection[index] = value;
+      } else if (action === 'remove') {
+        updatedSection.splice(index, 1);
+      }
+      return { ...prevData, [section]: updatedSection };
+    });
   };
 
   /**
@@ -384,26 +404,34 @@ export function ConsolePage() {
     );
     client.addTool(
       {
-        name: 'update_answers',
-        description:
-          'Updates the answers to the questions based on user input.',
+        name: 'update_form',
+        description: 'Updates the financial form based on user input.',
         parameters: {
           type: 'object',
           properties: {
+            section: {
+              type: 'string',
+              description: 'The section to update (assets, income, expenses).',
+            },
+            action: {
+              type: 'string',
+              description: 'The action to perform (add, update, remove).',
+            },
             index: {
               type: 'number',
-              description: 'Index of the question to update.',
+              description: 'The index of the item to update or remove.',
             },
-            answer: {
+            value: {
               type: 'string',
-              description: 'The new answer for the question.',
+              description: 'The new value for the item.',
             },
           },
-          required: ['index', 'answer'],
+          required: ['section', 'action'],
         },
       },
-      async ({ index, answer }: { [key: string]: any }) => {
-        handleAnswerUpdate(index, answer);
+      async ({ section, action, index, value }: { [key: string]: any }) => {
+        // Handle the update logic here
+        handleFormUpdate(section, action, index, value);
         return { ok: true };
       }
     );
@@ -459,23 +487,6 @@ export function ConsolePage() {
     'What are your expenses?',
   ];
 
-  const handleAnswerUpdate = (index: number, answer: string) => {
-    console.log(`Answer for question ${index + 1}: ${answer}`);
-    // Update the state with the new answer
-    setUpdatedAnswers((prevAnswers) => {
-      const newAnswers = [...prevAnswers];
-      const existingIndex = newAnswers.findIndex(
-        (item) => item.index === index
-      );
-      if (existingIndex !== -1) {
-        newAnswers[existingIndex] = { index, answer };
-      } else {
-        newAnswers.push({ index, answer });
-      }
-      return newAnswers;
-    });
-  };
-
   /**
    * Render the application
    */
@@ -501,6 +512,8 @@ export function ConsolePage() {
       <div className="content-main">
         <div className="content-logs">
           <div className="content-block events">
+            <div className="content-block-title">Financial Information</div>
+            <QuestionAndAnswer formData={formData} onFormUpdate={setFormData} />
             <div className="visualization">
               <div className="visualization-entry client">
                 <canvas ref={clientCanvasRef} />
@@ -616,13 +629,7 @@ export function ConsolePage() {
               {JSON.stringify(memoryKv, null, 2)}
             </div>
           </div>
-          <div className="content-block questions">
-            <div className="content-block-title">Financial Information</div>
-            <QuestionAndAnswer
-              formData={formData}
-              onFormUpdate={handleFormUpdate}
-            />
-          </div>
+          <div className="content-block questions"></div>
         </div>
       </div>
       <LogDrawer

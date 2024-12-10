@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FinancialForm } from '../utils/formSchema';
 
 interface QuestionAndAnswerProps {
@@ -55,9 +55,7 @@ export const QuestionAndAnswer: React.FC<QuestionAndAnswerProps> = ({
                 </button>
               </div>
             ))}
-            <button onClick={() => addItem(section)}>
-              Add {section.slice(0, -1)}
-            </button>
+            <button onClick={() => addItem(section)}>Add {section}</button>
           </div>
         )
       )}
