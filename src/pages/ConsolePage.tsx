@@ -471,8 +471,8 @@ export function ConsolePage() {
     <div data-component="ConsolePage">
       <div className="content-top">
         <div className="content-title">
-          <img src="/openai-logomark.svg" />
-          <span>ai form filler POC</span>
+          <img src="/logo-prescient.svg" />
+          <span>AI Form Filler POC</span>
         </div>
         <div className="content-api-key">
           {!LOCAL_RELAY_SERVER_URL && (
