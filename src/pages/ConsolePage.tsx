@@ -28,7 +28,8 @@ import { LogDrawer } from '../components/LogDrawer';
 import './ConsolePage.scss';
 import { RealtimeEvent } from '../utils/interfaces.js';
 import { Coordinates } from '../utils/interfaces.js';
-import { financialFormSchema, FinancialForm } from '../utils/formSchema';
+import { FinancialForm } from '../utils/formSchema';
+import { ResultsPage } from '../components/ResultsPage';
 
 export function ConsolePage() {
   /**
@@ -486,6 +487,14 @@ export function ConsolePage() {
     'What are your expenses?',
   ];
 
+  // State to manage view toggle
+  const [showResults, setShowResults] = useState(false);
+
+  // Function to toggle view
+  const toggleView = () => {
+    setShowResults((prevShowResults) => !prevShowResults);
+  };
+
   /**
    * Render the application
    */
@@ -511,8 +520,17 @@ export function ConsolePage() {
       <div className="content-main">
         <div className="content-logs">
           <div className="content-block events">
-            <div className="content-block-title">Financial Information</div>
-            <QuestionAndAnswer formData={formData} onFormUpdate={setFormData} />
+            <div className="content-block-title">
+              {showResults ? 'Results' : 'Financial Information'}
+            </div>
+            {showResults ? (
+              <ResultsPage />
+            ) : (
+              <QuestionAndAnswer
+                formData={formData}
+                onFormUpdate={setFormData}
+              />
+            )}
             <div className="visualization">
               <div className="visualization-entry client">
                 <canvas ref={clientCanvasRef} />
@@ -587,6 +605,11 @@ export function ConsolePage() {
             </div>
           </div>
           <div className="content-actions">
+            <Button
+              label={showResults ? 'Input Data' : 'View Results'}
+              buttonStyle="regular"
+              onClick={toggleView}
+            />
             <Toggle
               defaultValue={false}
               labels={['manual', 'vad']}
