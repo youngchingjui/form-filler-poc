@@ -8,6 +8,8 @@ Transform the existing application from demonstrating weather retrieval to filli
 
 Complete 1 item at a time. Once the item is completed, fill in the checkbox, and then move on to the next item.
 
+Also for each iteration, review the plan.md file and to-do list, and assess whether we need to make any changes to the plan.
+
 ## Features to Implement
 
 ### 1. Voice Input
