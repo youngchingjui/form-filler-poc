@@ -2,6 +2,7 @@ import React from 'react';
 import { FinancialForm } from '../utils/formSchema';
 import { Button } from './button/Button';
 import { Trash2 } from 'react-feather';
+import './QuestionAndAnswer.scss';
 
 interface QuestionAndAnswerProps {
   formData: FinancialForm;
