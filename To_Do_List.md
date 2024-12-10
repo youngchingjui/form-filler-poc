@@ -82,6 +82,17 @@ I want you to implement the todo-list item, then succinctly explain what you did
     - [ ] Ensure the drawer is hidden by default and only opens when the button is clicked.
     - [ ] Test the drawer functionality to ensure logs are displayed correctly and the UI remains responsive.
 
+### 5. Question and Answer Component
+
+- **Create a component to display questions and update with user responses**
+  - [ ] Design a component to display the following questions:
+    - [ ] "What are your assets?"
+    - [ ] "What is your income?"
+    - [ ] "What are your expenses?"
+  - [ ] Integrate the component into `src/pages/ConsolePage.tsx`.
+  - [ ] Ensure the component updates in real-time as the AI processes the user's voice input.
+  - [ ] Test the component to ensure it accurately reflects the user's responses.
+
 ## Technical Steps
 
 ### 1. Voice Input Handling
