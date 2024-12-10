@@ -113,9 +113,9 @@ export function ConsolePage() {
    * Initialize form data with default values
    */
   const [formData, setFormData] = useState<FinancialForm>({
-    assets: [''],
-    income: [''],
-    expenses: [''],
+    assets: [],
+    income: [],
+    expenses: [],
   });
 
   const handleFormUpdate = (
