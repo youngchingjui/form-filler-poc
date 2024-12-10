@@ -22,6 +22,7 @@ import { WavRenderer } from '../utils/wav_renderer';
 import { X, Edit, Zap, ArrowUp, ArrowDown } from 'react-feather';
 import { Button } from '../components/button/Button';
 import { Toggle } from '../components/toggle/Toggle';
+import { QuestionAndAnswer } from '../components/QuestionAndAnswer';
 
 import './ConsolePage.scss';
 
@@ -498,6 +499,17 @@ export function ConsolePage() {
     };
   }, []);
 
+  const questions = [
+    'What are your assets?',
+    'What is your income?',
+    'What are your expenses?',
+  ];
+
+  const handleAnswerUpdate = (index: number, answer: string) => {
+    console.log(`Answer for question ${index + 1}: ${answer}`);
+    // Here you can handle the updated answer, e.g., send it to the server or update the state
+  };
+
   /**
    * Render the application
    */
@@ -695,6 +707,13 @@ export function ConsolePage() {
             <div className="content-block-body content-kv">
               {JSON.stringify(memoryKv, null, 2)}
             </div>
+          </div>
+          <div className="content-block questions">
+            <div className="content-block-title">Questions</div>
+            <QuestionAndAnswer
+              questions={questions}
+              onAnswerUpdate={handleAnswerUpdate}
+            />
           </div>
         </div>
       </div>
