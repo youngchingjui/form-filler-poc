@@ -18,23 +18,19 @@ I want you to implement the todo-list item, then succinctly explain what you did
 
 - **Capture user responses to three main questions using voice input.**
   - [ ] **Review Existing Components**
-    - [ ] Examine the current `WavRecorder` implementation.
+    - [ ] Examine the current `WavRecorder` implementation in `src/lib/wavtools/lib/wav_recorder.js`.
     - [ ] Identify how `WavRecorder` integrates with other parts of the application.
-  - [ ] **Configure Voice Recording**
-    - [ ] Set up `WavRecorder` to capture audio for the first question.
-    - [ ] Repeat setup for the second question.
-    - [ ] Repeat setup for the third question.
+  - [ ] **Configure Continuous Voice Streaming**
+    - [ ] Modify `WavRecorder` to support continuous voice streaming.
+    - [ ] Ensure the stream is compatible with the API for real-time processing.
   - [ ] **Integrate with UI**
-    - [ ] Add UI prompts for the first question.
-    - [ ] Add UI prompts for the second question.
-    - [ ] Add UI prompts for the third question.
+    - [ ] Add UI prompts for each question in `src/pages/ConsolePage.tsx`.
+    - [ ] Implement dynamic UI updates based on real-time transcription.
   - [ ] **Handle Voice Data**
-    - [ ] Implement callbacks to handle the completion of each recording.
+    - [ ] Implement a continuous data flow to process and map transcriptions to form fields.
     - [ ] Store the captured audio data for processing.
   - [ ] **Testing**
-    - [ ] Test voice capture for the first question.
-    - [ ] Test voice capture for the second question.
-    - [ ] Test voice capture for the third question.
+    - [ ] Test continuous voice capture and real-time UI updates.
     - [ ] Validate the accuracy of captured audio.
 
 ### 2. Real-time API Integration
@@ -44,23 +40,23 @@ I want you to implement the todo-list item, then succinctly explain what you did
     - [ ] Obtain API keys for OpenAI real-time API.
     - [ ] Securely store API keys in environment variables.
   - [ ] **Integrate API Client**
-    - [ ] Set up the API client within `RealtimeClient`.
-    - [ ] Configure API endpoints for voice processing.
+    - [ ] Set up the API client within `node_modules/@openai/realtime-api-beta/lib/client.js`.
+    - [ ] Configure API endpoints for continuous voice processing.
   - [ ] **Data Flow Implementation**
-    - [ ] Send captured voice data to the API for transcription.
-    - [ ] Receive and handle transcription responses.
+    - [ ] Implement a streaming data flow in `RealtimeClient` to handle continuous audio input.
+    - [ ] Handle transcription responses and map them to form fields.
   - [ ] **Error Handling**
     - [ ] Implement error handling for API request failures.
     - [ ] Create fallback mechanisms for failed API calls.
   - [ ] **Testing**
-    - [ ] Test API integration with sample voice inputs.
+    - [ ] Test API integration with continuous voice inputs.
     - [ ] Validate the accuracy of transcriptions.
 
 ### 3. Form Fields
 
 - **Implement the following form fields:**
   - **Current Net Worth and Asset Breakdown**
-    - [ ] Design the UI layout for net worth input.
+    - [ ] Design the UI layout for net worth input in `src/pages/ConsolePage.tsx`.
     - [ ] Create input fields for asset categories.
     - [ ] Implement validation for net worth values.
   - **Income and Its Breakdown**
@@ -81,12 +77,10 @@ I want you to implement the todo-list item, then succinctly explain what you did
 
 - **Utilize the existing `WavRecorder` for capturing voice input.**
 
-  - [ ] Review the `WavRecorder` component code.
-  - [ ] Modify `WavRecorder` to handle three separate recordings.
-  - [ ] Ensure recordings are saved in a compatible format for the API.
+  - [ ] Review and modify `WavRecorder` in `src/lib/wavtools/lib/wav_recorder.js` to handle continuous voice streaming.
 
 - **Ensure the `RealtimeClient` is set up to handle voice input and transcription.**
-  - [ ] Update `RealtimeClient` to accept multiple audio inputs.
+  - [ ] Update `RealtimeClient` to accept continuous audio inputs.
   - [ ] Implement functions to send audio data to the API.
   - [ ] Handle transcription responses and map them to form fields.
 
@@ -107,7 +101,7 @@ I want you to implement the todo-list item, then succinctly explain what you did
 
 - **Create a new component or modify an existing one to display the financial suitability form.**
 
-  - [ ] Design the form layout with all required fields.
+  - [ ] Design the form layout with all required fields in `src/pages/ConsolePage.tsx`.
   - [ ] Implement the form component in React.
   - [ ] Ensure the form is responsive and user-friendly.
 
